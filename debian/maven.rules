@@ -1,0 +1,14 @@
+
+net.sourceforge.jtds jtds jar s/.*/debian/ * *
+org.flywaydb flyway-commandline jar s/.*/debian/ * *
+org.flywaydb flyway-core jar s/.*/debian/ * *
+org.flywaydb flyway-parent pom s/.*/debian/ * *
+org.jboss jboss-vfs jar s/.*/debian/ * *
+org.xerial sqlite-jdbc jar s/.*/debian/ * *
+commons-logging s/commons-logging-api/commons-logging/ * s/.*/debian/ * *
+s/hsqldb/org.hsqldb/ hsqldb * s/.*/debian/ * *
+s/org.apache.felix/org.osgi/ org.osgi.core * * * *
+s/ant/org.apache.ant/ * * s/.*/debian/ * *
+org.apache.maven maven* * s/.*/3.x/ * *
+s/com.google.android/com.android/ android * s/.*/23/ * *
+

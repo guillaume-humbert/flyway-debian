@@ -1,0 +1,22 @@
+Source: flyway
+Section: java
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Guillaume J Humbert <guillaume.j.humbert@pm.me>
+Build-Depends: debhelper (>= 11), default-jdk, maven-debian-helper (>= 2.1)
+Build-Depends-Indep: libderby-java, libderbyclient-java, libh2-java (>= 1.4.196), libhsqldb-java (>= 2.4.1),  
+ libjna-java, libjna-platform-java, libjtds-java (>= 1.2.5), libmariadb-java (>= 2.3.0),  
+ libmaven-bundle-plugin-java (>= 3.5.1), libmysql-java, libpostgresql-jdbc-java,  
+ libsqlite-jdbc-java (>= 3.23.1) 
+Standards-Version: 4.2.1
+Vcs-Git: https://salsa.debian.org/java-team/flyway.git
+Vcs-Browser: https://salsa.debian.org/java-team/flyway
+Homepage: https://flywaydb.org
+
+Package: libflyway-java
+Architecture: all
+Depends: ${misc:Depends}, ${maven:Depends}
+Suggests: ${maven:OptionalDepends}
+Description: flyway-parent
+ Flyway: Database Migrations Made Easy.
+

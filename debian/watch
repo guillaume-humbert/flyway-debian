@@ -1,0 +1,3 @@
+version=3
+opts="repack,compression=xz" \
+https://github.com/flyway/flyway/tags .*/(?:.*?)([\d\.]+)\.tar\.gz

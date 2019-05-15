@@ -1,0 +1,54 @@
+--- a/flyway-commandline/src/main/java/org/flywaydb/commandline/Main.java
++++ b/flyway-commandline/src/main/java/org/flywaydb/commandline/Main.java
+@@ -203,8 +203,8 @@
+      * @param properties The properties object to initialize.
+      */
+     private static void initializeDefaults(Properties properties) {
+-        properties.put(ConfigUtils.LOCATIONS, "filesystem:" + new File(getInstallationDir(), "sql").getAbsolutePath());
+-        properties.put(ConfigUtils.JAR_DIRS, new File(getInstallationDir(), "jars").getAbsolutePath());
++        properties.put(ConfigUtils.LOCATIONS, "filesystem:" + new File(System.getProperty("user.home") + "/.flyway/sql").getAbsolutePath());
++        properties.put(ConfigUtils.JAR_DIRS, new File(System.getProperty("user.home") + "/.flyway/jars").getAbsolutePath());
+     }
+ 
+     /**
+@@ -327,7 +327,7 @@
+      * @throws IOException When the jars could not be loaded.
+      */
+     private static ClassLoader loadJdbcDrivers(ClassLoader classLoader) throws IOException {
+-        File driversDir = new File(getInstallationDir(), "drivers");
++        File driversDir = new File(System.getProperty("user.home") + "/.flyway/drivers");
+         File[] files = driversDir.listFiles(new FilenameFilter() {
+             public boolean accept(File dir, String name) {
+                 return name.endsWith(".jar");
+@@ -356,6 +356,13 @@
+      * @throws IOException When the jars could not be loaded.
+      */
+     private static ClassLoader loadJavaMigrationsFromJarDirs(ClassLoader classLoader, Properties properties) throws IOException {
++
++        File directory = new File(System.getProperty("user.home") + "/.flyway/jars");
++        if (! directory.exists()) {
++            directory.mkdirs();
++            LOG.info("Created directory: " + directory.getAbsolutePath());
++        }
++
+         String jarDirs = properties.getProperty(ConfigUtils.JAR_DIRS);
+         if (!StringUtils.hasLength(jarDirs)) {
+             return classLoader;
+@@ -397,8 +404,8 @@
+     static void loadConfigurationFromConfigFiles(Properties properties, String[] args, Map<String, String> envVars) {
+         String encoding = determineConfigurationFileEncoding(args, envVars);
+ 
+-        properties.putAll(ConfigUtils.loadConfigurationFile(new File(getInstallationDir() + "/conf/" + ConfigUtils.CONFIG_FILE_NAME), encoding, false));
+-        properties.putAll(ConfigUtils.loadConfigurationFile(new File(System.getProperty("user.home") + "/" + ConfigUtils.CONFIG_FILE_NAME), encoding, false));
++        properties.putAll(ConfigUtils.loadConfigurationFile(new File("/etc/flyway/" + ConfigUtils.CONFIG_FILE_NAME), encoding, false));
++        properties.putAll(ConfigUtils.loadConfigurationFile(new File(System.getProperty("user.home") + "/.flyway/" + ConfigUtils.CONFIG_FILE_NAME), encoding, false));
+         properties.putAll(ConfigUtils.loadConfigurationFile(new File(ConfigUtils.CONFIG_FILE_NAME), encoding, false));
+ 
+         for (File configFile : determineConfigFilesFromArgs(args, envVars)) {
+@@ -587,4 +594,4 @@
+ 
+         return operations;
+     }
+-}
+\ No newline at end of file
++}

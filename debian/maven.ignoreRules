@@ -1,0 +1,10 @@
+
+org.flywaydb flyway-gradle-plugin jar * * *
+org.flywaydb flyway-maven-plugin maven-plugin * * *
+com.microsoft.sqlserver mssql-jdbc * * * *
+com.mycila license-maven-plugin * * * *
+org.apache.maven.plugins maven-deploy-plugin * * * *
+org.apache.maven.plugins maven-javadoc-plugin * * * *
+org.apache.maven.plugins maven-scm-plugin * * * *
+org.apache.maven.plugins maven-source-plugin * * * *
+org.codehaus.mojo versions-maven-plugin * * * *
